@@ -1,6 +1,6 @@
 # CHANGELOG.md
 
-All significant changes made to this project will be documented in this file. Each entry should include the date, the contributor's name, and a summary of the changes made.
+All significant changes made to this project will be documented in this file. Each entry should include the date, the contributor's name, and changes made.
 
 ## Template
 
