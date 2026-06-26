@@ -2,51 +2,15 @@
 CS0051 Final Project
 
 # How to Use:
-
-## 1. Switch to Your Assigned Branch
+This repository uses feature branches for each member. Do not commit directly to the main branch. (Correct me if I'm wrong/if you have a better way of handling this TwT not an expert at using this)
 
 1. Open the repository.
-2. Click the branch selector (it usually says **main**).
-3. Search for and select your assigned branch (e.g., `player-feature`, `match-feature`, etc.).
-
-> **Important:** Do not upload files directly to the `main` branch.
-
----
-
-## 2. Upload Your Files
-
-1. Click **Add file** → **Upload files**.
-2. Drag and drop your assigned file(s) or click **choose your files**.
-3. Upload only the files assigned to you.
-
----
-
-## 3. Commit Your Changes
-
-1. Enter a commit message (e.g., `Added player.cpp and player.h`).
-2. Select **Commit directly to the current branch**.
-3. Click **Commit changes**.
-
----
-
-## 4. Update the Changelog
-
-1. Open `CHANGELOG.md`.
-2. Click **Edit**.
-3. Copy the template and add your entry at the bottom.
-4. Commit the changes to **your branch**.
-
----
-
-## 5. Create a Pull Request
-
-1. Open the **Pull requests** tab.
-2. Click **New pull request**.
-3. Set:
-   - **base:** `main`
-   - **compare:** your assigned branch
-4. Click **Create pull request**.
-5. Add a short description of your changes.
-6. Click **Create pull request**.
-
-The repository owner will review and merge your changes into the `main` branch.
+2. Switch to your assigned branch.
+3. Click Add file and then Upload files.
+4. Upload only the files assigned to you.
+5. Enter a descriptive commit message. (ex: Added player.cpp and player.h)
+6. Select Commit directly to the current branch.
+7. Click Commit changes.
+8. Update CHANGELOG.md by adding a new entry describing your changes.
+9. Create a Pull Request from your branch to main.
+10. Wait for the repository owner to review and merge your changes.
