@@ -1,6 +1,7 @@
 All changes to this project will be documented in this file.
 
 ======================
+
 [TEMPLATE]
 ### Date: 2026-0X-XX
 
@@ -8,6 +9,7 @@ All changes to this project will be documented in this file.
 
 **Changes:**
 - 
+
 ======================
 
 ### Date: 2026-06-27
