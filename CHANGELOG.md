@@ -4,13 +4,15 @@ All significant changes made to this project will be documented in this file. Ea
 
 ## Template
 
-### Date: 2026-0x-xx
+### Date: 2026-0X-XX
 
 **Name:** Your Name
 
 **Changes:**
 - Describe the changes you made.
 - Add more bullet points if needed.
+
+## Change Log
 
 ### Date: 2026-06-27
 
