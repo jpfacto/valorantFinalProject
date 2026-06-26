@@ -2,8 +2,6 @@
 
 All significant changes made to this project will be documented in this file. Each entry should include the date, the contributor's name, and a summary of the changes made.
 
-=====================================
-
 ## Template
 
 ### Date: 2026-0x-xx
@@ -13,8 +11,6 @@ All significant changes made to this project will be documented in this file. Ea
 **Changes:**
 - Describe the changes you made.
 - Add more bullet points if needed.
-
-=====================================
 
 ### Date: 2026-06-27
 
