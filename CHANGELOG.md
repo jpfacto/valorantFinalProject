@@ -1,5 +1,15 @@
 All changes to this project will be documented in this file.
 
+======================
+[TEMPLATE]
+### Date: 2026-0X-XX
+
+**Name:** 
+
+**Changes:**
+- 
+======================
+
 ### Date: 2026-06-27
 
 **Name:** Janelle
@@ -11,3 +21,4 @@ All changes to this project will be documented in this file.
 - Added `player.h`.
 - Added `player.cpp`.
 - Added initial `main.cpp`.
+
