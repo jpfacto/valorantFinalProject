@@ -1,6 +1,6 @@
 # CHANGELOG.md
 
-All significant changes made to this project will be documented in this file. Each entry should include the date, the contributor's name, and changes made.
+All significant changes made to this project will be documented in this file. Each entry should include the date, the contributor's name, and changes made. Only edit the changelog.md in the main branch
 
 ## Template
 
@@ -25,3 +25,12 @@ All significant changes made to this project will be documented in this file. Ea
 - Added the initial `player.h`.
 - Added the initial `player.cpp`.
 - Added the initial `main.cpp`.
+
+### Date: 2026-06-29
+
+**Name:** Barquin
+
+**Changes:**
+- Added the  `match.h`.
+- Added the  `match.cpp`.
+- Also added `updated player.cpp` here as I am unsure of how things work here. :>
