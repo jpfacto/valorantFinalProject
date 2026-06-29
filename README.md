@@ -1,6 +1,11 @@
 # valorantFinalProject
 CS0051 Final Project
 
+# Document Link:
+https://docs.google.com/document/d/1ZNXM6d_Bunu9AkhFAHeYQ-aoLHTnc4Zw7wl4MUkwbrA/edit
+
+# Canva Presentation Link:
+
 # How to Use:
 This repository uses feature branches for each member. Do not commit directly to the main branch. (Correct me if I'm wrong/if you have a better way of handling this TwT not an expert at using this)
 
