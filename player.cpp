@@ -1,10 +1,13 @@
 #include "player.h"
+#include "match.h"
 
 #include <cstdlib>
 #include <ctime>
 #include <chrono>
 #include <algorithm>
 #include <random>
+
+using namespace std;
 
 mutex console;
 
@@ -164,8 +167,8 @@ void playerCode()
 
     vector<Match> matches;
 
-    matches.push_back({ &teams[0], &teams[2] }); // A vs C
-    matches.push_back({ &teams[1], &teams[3] }); // B vs D
+    matches.emplace_back(&teams[0], &teams[2]);
+    matches.emplace_back(&teams[1], &teams[3]);
 
     vector<Agent> agents = createAgents();
 
@@ -262,5 +265,13 @@ void playerCode()
             t.join();
 
         cout << "\nAll players from Team D have selected their agents!\n\n";
+    }
+
+    cout << "[MATCH PHASE]\n";
+
+    for (Match& match : matches) {
+        match.startMatch();
+        match.simulateMatch();
+        match.winner();
     }
 }
