@@ -36,11 +36,6 @@ public:
     Team(string n = "");
 };
 
-struct Match {
-    Team* team1;
-    Team* team2;
-};
-
 vector<Team> defaultTeams();
 void createTeams(vector<Team>& teams, int additionalTeams);
 vector<Player> createPlayers(int totalPlayers);
