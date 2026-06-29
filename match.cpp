@@ -77,7 +77,7 @@ void Match::playerMatchEvent(Player& player, barrier<>& matchSync, Team* enemyTe
                 if (victim != nullptr){
                     deadPlayers.push_back(victim->name);
                     cout << player.name << " (" << player.agent << ") eliminated " 
-                         << victim->name << " (" << victim->agent << ")!\n";
+                              << victim->name << " (" << victim->agent << ")!\n";
                 } else {
                     cout << player.name << " (" << player.agent << ") picked up a dropped weapon!\n";
                 }
@@ -111,7 +111,7 @@ void Match::simulateMatch(){
             threads.emplace_back(&Match::playerMatchEvent, this, ref(*p), ref(matchSync), teamB, ref(spikePlanted), ref(spikeDefused), ref(deadPlayers));
         }
         for (Player* p : teamB->players){
-            threads.emplace_back(&Match::playerMatchEvent, this, ref(*p), ref(matchSync), teamA, ref(spikePlanted), ref(spikeDefused), ref(deadPlayers));
+            threads.emplace_back(&Match::playerMatchEvent, this,ref(*p), ref(matchSync), teamA, ref(spikePlanted), ref(spikeDefused), ref(deadPlayers));
         }
 
         for (thread& t : threads){

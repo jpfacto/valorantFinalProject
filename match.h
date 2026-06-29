@@ -6,6 +6,8 @@
 #include <vector>
 #include <string>
 
+using namespace std;
+
 class Match {
 private:
     Team* teamA;
@@ -15,8 +17,8 @@ private:
     Team* matchWinner;
     int currentRound;
 
-    void playerMatchEvent(Player& player, std::barrier<>& matchSync, Team* enemyTeam, 
-                          bool& spikePlanted, bool& spikeDefused, std::vector<std::string>& deadPlayers);
+    void playerMatchEvent(Player& player, barrier<>& matchSync, Team* enemyTeam, 
+                          bool& spikePlanted, bool& spikeDefused, vector<string>& deadPlayers);
 
 public:
     Match(Team* tA, Team* tB);
