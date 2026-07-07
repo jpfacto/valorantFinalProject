@@ -34,3 +34,18 @@ All significant changes made to this project will be documented in this file. Ea
 - Added the  `match.h`.
 - Added the  `match.cpp`.
 - Also added `updated player.cpp` here as I am unsure of how things work here. :>
+
+### Date: 2026-07-07
+
+**Name:** Enteria
+
+**Changes:**
+- Added barrier.cpp
+- Added barrier.h
+- Added updated_player.cpp
+- Added updated_player.h
+- Added updated_match.cpp
+- Added updated_match.h
+
+note: when trying to run the code remove the "updated_". (ex. match.cpp instead of updated_player.cpp)
+
