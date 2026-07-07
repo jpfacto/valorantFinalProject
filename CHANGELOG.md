@@ -48,3 +48,11 @@ All significant changes made to this project will be documented in this file. Ea
 - Added updated_match.h
 
 note: when trying to run the code remove the "updated_". (ex. match.cpp instead of updated_player.cpp)
+
+### Date: 2026-07-07
+
+**Name:** Maculangan
+- Added validation.cpp
+- Added validation.h
+
+Note: I used the latest version of the files (from barrier branch), as recently updated by Enteria. 
