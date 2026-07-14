@@ -2,7 +2,7 @@
 #define MATCH_H
 
 #include "player.h" 
-#include <barrier>
+#include "barrier.h" // [Member 4 - Simon] swapped raw <barrier> for our shared Barrier class
 #include <vector>
 #include <string>
 
@@ -17,7 +17,7 @@ private:
     Team* matchWinner;
     int currentRound;
 
-    void playerMatchEvent(Player& player, barrier<>& matchSync, Team* enemyTeam, 
+    void playerMatchEvent(Player& player, Barrier& matchSync, Team* enemyTeam, // [Member 4 - Simon] barrier<>& -> Barrier&
                           bool& spikePlanted, bool& spikeDefused, vector<string>& deadPlayers);
 
 public:

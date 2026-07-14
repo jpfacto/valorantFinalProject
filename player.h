@@ -5,8 +5,8 @@
 #include <vector>
 #include <string>
 #include <thread>
-#include <barrier>
 #include <mutex>
+#include "barrier.h" // [Member 4 - Simon] swapped raw <barrier> for our shared Barrier class
 
 using namespace std;
 
@@ -43,8 +43,11 @@ void teamAssignment(vector<Player>& players, vector<Team>& teams);
 
 vector<Agent> createAgents();
 
-void playerConnection(Player& player, barrier<>& sync);
-void agentSelection(Player& player, vector<Agent>& availableAgents, barrier<>& sync);
+void playerConnection(Player& player, Barrier& sync); // [Member 4 - Simon] barrier<>& -> Barrier&
+void agentSelection(Player& player, Barrier& sync); // [Member 4 - Simon] barrier<>& -> Barrier&
+
+void startConnectionPhase(vector<Player>& players);
+void startAgentSelectionPhase(vector<Player>& players, vector<Agent>& agents);
 
 void playerCode();
 

@@ -1,5 +1,6 @@
 #include "player.h"
 #include "match.h"
+#include "tournament.h"
 
 #include <cstdlib>
 #include <ctime>
@@ -10,6 +11,7 @@
 using namespace std;
 
 mutex console;
+extern vector<Team> masterTeams;
 
 // Constructors
 Agent::Agent(string n) {
@@ -111,7 +113,7 @@ vector<Agent> createAgents() {
 
 // Connecting Players
 
-void playerConnection(Player& player, barrier<>& sync) {
+void playerConnection(Player& player, Barrier& sync) { // [Member 4 - Simon] barrier<>& -> Barrier&
 
     {
         lock_guard<mutex> lock(console);
@@ -127,12 +129,12 @@ void playerConnection(Player& player, barrier<>& sync) {
         cout << player.name << " from " << player.team << " has connected!\n";
     }
 
-    sync.arrive_and_wait();
+    sync.arriveAndWait(); // [Member 4 - Simon] arrive_and_wait() -> arriveAndWait()
 }
 
 // Agent Selection
 
-void agentSelection(Player& player, vector<Agent>& availableAgents, barrier<>& sync) {
+void agentSelection(Player& player, Barrier& sync) { // [Member 4 - Simon] barrier<>& -> Barrier&
     
     {
         lock_guard<mutex> lock(console);
@@ -148,7 +150,23 @@ void agentSelection(Player& player, vector<Agent>& availableAgents, barrier<>& s
         cout << player.name << " from " << player.team << " selected " << player.agent << "!\n";
     }
 
-    sync.arrive_and_wait();
+    sync.arriveAndWait(); // [Member 4 - Simon] arrive_and_wait() -> arriveAndWait()
+}
+
+void startConnectionPhase(vector<Player>& players)
+{
+    int index = 0;
+
+    while (index < players.size()) {
+        Barrier sync = Barrier::connectionBarrier(5);
+        vector<thread> threads;
+
+        for (int i = 0; i < 5 && index < players.size(); i++, index++)
+            threads.emplace_back(playerConnection, ref(players[index]), ref(sync));
+
+        for (thread& t : threads)
+            t.join();
+    }
 }
 
 // Member 1 Main Code
@@ -157,8 +175,8 @@ void playerCode()
 {
     srand(time(nullptr));
 
-    vector<Team> teams = defaultTeams();
-    vector<Player> players = createPlayers(20);
+    vector<Team> teams = masterTeams;
+    vector<Player> players = createPlayers(teams.size() * 5);
 
     if(players.empty())
         return;
@@ -176,7 +194,7 @@ void playerCode()
 
     for(Team& team : teams)
     {
-        barrier sync(team.players.size());
+        Barrier sync = Barrier::connectionBarrier(team.players.size()); // [Member 4 - Simon] now uses shared Barrier class
         vector<thread> threads;
 
         for(Player* player : team.players)
@@ -193,47 +211,44 @@ void playerCode()
     random_device rd;
     mt19937 g(rd());
 
-    vector<Agent> match1Agents = agents;
-    shuffle(match1Agents.begin(), match1Agents.end(), g);
-
-    int index = 0;
-
-    for(Player* player : teams[0].players)
-        player->agent = match1Agents[index++].name;
-
-    for(Player* player : teams[2].players)
-        player->agent = match1Agents[index++].name;
-
-    vector<Agent> match2Agents = agents;
-    shuffle(match2Agents.begin(), match2Agents.end(), g);
-
-    index = 0;
-
-    for(Player* player : teams[1].players)
-        player->agent = match2Agents[index++].name;
-
-    for(Player* player : teams[3].players)
-        player->agent = match2Agents[index++].name;
-
+    // Assign random agents to every team
+    for (Team& team : teams)
     {
-        barrier sync(teams[0].players.size());
+        vector<Agent> shuffledAgents = agents;
+
+        shuffle(shuffledAgents.begin(), shuffledAgents.end(), g);
+
+        int index = 0;
+
+        for (Player* player : team.players)
+        {
+            player->agent = shuffledAgents[index++].name;
+        }
+
+        Barrier sync = Barrier::selectionBarrier(team.players.size());
         vector<thread> threads;
 
-        for(Player* player : teams[0].players)
-            threads.emplace_back(agentSelection, ref(*player), ref(match1Agents), ref(sync));
+        for (Player* player : team.players)
+        {
+            threads.emplace_back(agentSelection, ref(*player), ref(sync));
+        }
 
-        for(thread& t : threads)
+        for (thread& t : threads)
+        {
             t.join();
+        }
 
-        cout << "\nAll players from Team A have selected their agents!\n\n";
+        cout << "\nAll players from "
+            << team.name
+            << " have selected their agents!\n\n";
     }
 
     {
-        barrier sync(teams[2].players.size());
+        Barrier sync = Barrier::selectionBarrier(teams[2].players.size()); // [Member 4 - Simon] now uses shared Barrier class
         vector<thread> threads;
 
         for(Player* player : teams[2].players)
-            threads.emplace_back(agentSelection, ref(*player), ref(match1Agents), ref(sync));
+            threads.emplace_back(agentSelection, ref(*player), ref(sync));
 
         for(thread& t : threads)
             t.join();
@@ -242,11 +257,11 @@ void playerCode()
     }
 
     {
-        barrier sync(teams[1].players.size());
+        Barrier sync = Barrier::selectionBarrier(teams[1].players.size()); // [Member 4 - Simon] now uses shared Barrier class
         vector<thread> threads;
 
         for(Player* player : teams[1].players)
-            threads.emplace_back(agentSelection, ref(*player), ref(match2Agents), ref(sync));
+            threads.emplace_back(agentSelection, ref(*player), ref(sync));
 
         for(thread& t : threads)
             t.join();
@@ -255,11 +270,11 @@ void playerCode()
     }
 
     {
-        barrier sync(teams[3].players.size());
+        Barrier sync = Barrier::selectionBarrier(teams[3].players.size()); // [Member 4 - Simon] now uses shared Barrier class
         vector<thread> threads;
 
         for(Player* player : teams[3].players)
-            threads.emplace_back(agentSelection, ref(*player), ref(match2Agents), ref(sync));
+            threads.emplace_back(agentSelection, ref(*player), ref(sync));
 
         for(thread& t : threads)
             t.join();
@@ -267,11 +282,10 @@ void playerCode()
         cout << "\nAll players from Team D have selected their agents!\n\n";
     }
 
-    cout << "[MATCH PHASE]\n";
+    cout << "\n[Generating Dynamic Tournament Bracket]\n";
 
-    for (Match& match : matches) {
-        match.startMatch();
-        match.simulateMatch();
-        match.winner();
-    }
+    Tournament activeTournament(teams);
+
+    activeTournament.runTournament();
+
 }
